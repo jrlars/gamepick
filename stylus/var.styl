@@ -1,0 +1,27 @@
+$phone-down = 'screen and (max-width: 767px)'
+$tablet-up = 'screen and (min-width: 768px)'
+$desktop-up = 'screen and (min-width: 992px)'
+$desktop-large-up = 'screen and (min-width: 1200px)'
+
+$color-navy = #013264
+$color-white = #ffffff
+$color-red = #e11133
+
+
+.visible-xs
+    @media $tablet-up
+        display none
+
+.hidden-xs
+    @media $phone-down
+        display none !important
+.hidden-sm
+    @media $tablet-up
+        display none !important
+
+.hidden-lg
+    @media $desktop-up
+        display none !important
+
+get(hash, key)
+    return pair[1] if pair[0] == key for pair in hash

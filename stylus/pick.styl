@@ -1,0 +1,50 @@
+#pick
+    color $color-white
+    h3
+        color $color-white
+        text-align center
+    #scheduleWrapper
+        padding-top 30px
+        #matchupsContainer
+            @media $tablet-up
+                width 600px
+                margin 0px auto
+                display block
+                position relative
+            .matchupWrapper
+                width 100%
+                display block
+                p
+                    margin-bottom 0
+                &.tbd
+                    .teamWrapper
+                        transform scale(.9)
+                @media $tablet-up
+                    padding 8px
+                    margin-bottom 20px
+                    border-radius 5px
+                .teamWrapper
+                    display inline-block
+                    width 45%
+                    padding 10px 8px
+                    background-color rgba(255,255,255,.4)
+                    transition transform .3s ease
+                    border-radius 4px
+                    @media $desktop-up
+                        cursor pointer
+                    &.selected
+                        background-color rgba(255,255,255,.6)
+                    &.unselected
+                        transform scale(.8)
+                        background-color rgba(255,255,255,.2)
+                    &.homeTeamWrapper
+                        text-align right
+                    &.awayTeamWrapper
+                        text-align left
+                .atWrapper
+                    display inline-block
+                    width 10%
+                    text-align center
+                    cursor drag
+                    height 100%
+                    background-color rgba(255,255,255,.1)
