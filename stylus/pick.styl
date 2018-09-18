@@ -11,6 +11,67 @@
                 margin 0px auto
                 display block
                 position relative
+            .dropzone
+                min-height 30px
+                height 30px
+                // background-color rgba(155,155,255,.4)
+                // margin-bottom 20px
+                position relative
+                transition all .2s ease
+                padding-left 15px
+                padding-right 15px
+                &.currentlyDragged
+                    background-color green !important
+                    .matchupWrapper
+                        .matchupIndex
+                            display none
+                    // transform scale(.5)
+                &.dropHover
+                    // background-color red !important
+                    height 80px
+                    // width 110%
+                    // margin-left -5%
+                    padding-left 0
+                    padding-right 0
+                    .matchupIndex
+                        span
+                            opacity .8 !important
+                    &:after
+                        height 80% !important
+                        width 100% !important
+                        background-color rgba(255,255,255,.4)
+                &.occupied
+                    height 60px
+                    background-color rgba(155,155,255,.2)
+                &.unoccupied
+                    .matchupIndex
+                        position absolute
+                        left -5%
+                        top 50%
+                        transform translateY(-50%)
+                        span
+                            font-weight bold
+                            font-size 24px
+                            opacity .5
+                    &:after
+                        content ""
+                        width 80%
+                        height 4px
+                        display block
+                        position absolute
+                        margin 0px auto
+                        background-color rgba(255,255,255,.1)
+                        top 50%
+                        transform translateY(-50%) translateX(-50%)
+                        left 50%
+                        transition all .2s ease
+                    &.currentlyDraggedNeighbor
+                        min-height 10px
+                        height 0px
+                        .matchupIndex
+                            display none
+                        &:after
+                            height 0
             .matchupWrapper
                 width 100%
                 display block
@@ -48,3 +109,23 @@
                     cursor drag
                     height 100%
                     background-color rgba(255,255,255,.1)
+                .matchupIndex
+                    position absolute
+                    left -5%
+                    top 50%
+                    transform translateY(-50%)
+                    span
+                        font-weight bold
+                        font-size 32px
+    #submitButtonWrapper
+        #submitButton
+            cursor pointer
+            width 200px
+            display block
+            margin 0px auto
+            background-color white
+            text-align center
+            color $color-navy
+            padding 10px 30px
+            border-radius 5px
+            margin-bottom 30px

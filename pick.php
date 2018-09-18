@@ -14,7 +14,13 @@
     <div class="container" id="scheduleWrapper">
         <!-- WHERE THE D3 GOES -->
     </div>
-
+    <div class="container" id="submitButtonWrapper">
+        <div id="submitButton">
+            <p>
+                SUBMIT
+            </p>
+        </div>
+    </div>
     <!-- WILL NEED SUBMIT BUTTON? -->
 </body>
 <?php include "components/code-footer.php" ?>
