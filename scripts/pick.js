@@ -175,17 +175,25 @@ function renderSchedule(){
     })
 
     d3.select("#submitButton").on("click", function(){
+        console.log("submit");
         finalChoice = [];
         var incompleteFlag = 0;
         $(".matchupWrapper").each(function(){
             if($(this).hasClass("tbd")){
                 incompleteFlag = 1;
             }
-        })
+        });
+        var incompleteFlag = 0;
         if(!incompleteFlag){
-            d3.selectAll(".matchupWrapper").each(function(d){
+            d3.selectAll(".matchupWrapper").each(function(d,i){
+                console.log(d);
+                var choice = {
+                    "confidence" : i,
+
+                }
                 finalChoice.push(d);
-            })
+            });
+            console.log(finalChoice);
         }else{
             d3.select("#submitButton").style("background-color", "red");
         }
