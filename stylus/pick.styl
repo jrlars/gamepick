@@ -5,68 +5,55 @@
         text-align center
     #scheduleWrapper
         padding-top 30px
+        padding-bottom 50px
         #matchupsContainer
+            &.dragging
+                .dropzone.unoccupied
+                    height 40px
+                    &:after
+                        height 3px
+                        background-color $color-mid-navy
             @media $tablet-up
                 width 600px
                 margin 0px auto
                 display block
                 position relative
             .dropzone
-                min-height 30px
-                height 30px
-                // background-color rgba(155,155,255,.4)
-                // margin-bottom 20px
+                height auto
                 position relative
-                transition all .2s ease
-                padding-left 15px
-                padding-right 15px
+                transition all .2s ease-in-out
                 &.currentlyDragged
-                    background-color green !important
-                    .matchupWrapper
-                        .matchupIndex
-                            display none
-                    // transform scale(.5)
-                &.dropHover
-                    // background-color red !important
-                    height 80px
-                    // width 110%
-                    // margin-left -5%
-                    padding-left 0
-                    padding-right 0
+                    opacity .25
+                    .matchupBG
+                        opacity 0
                     .matchupIndex
-                        span
-                            opacity .8 !important
-                    &:after
-                        height 80% !important
-                        width 100% !important
-                        background-color rgba(255,255,255,.4)
-                &.occupied
-                    height 60px
-                    background-color rgba(155,155,255,.2)
+                        display block !important
+                        opacity 0
                 &.unoccupied
+                    height 30px
                     .matchupIndex
                         position absolute
+                        color $color-mid-navy
                         width 30px
-                        left -40px
+                        left -50px
                         text-align center
                         top 50%
                         transform translateY(-50%)
                         span
                             font-weight bold
-                            font-size 24px
-                            opacity .5
+                            font-size 32px
                     &:after
                         content ""
-                        width 80%
-                        height 4px
+                        width 30%
+                        height 2px
                         display block
                         position absolute
                         margin 0px auto
-                        background-color rgba(255,255,255,.1)
+                        background-color $color-dark-navy
                         top 50%
                         transform translateY(-50%) translateX(-50%)
                         left 50%
-                        transition all .2s ease
+                        transition all .1s ease
                     &.currentlyDraggedNeighbor
                         min-height 10px
                         height 0px
@@ -74,54 +61,149 @@
                             display none
                         &:after
                             height 0
+                &.dropHover
+                    height 100px !important
+                    padding-left 0
+                    padding-right 0
+                    .matchupIndex
+                        span
+                            color $color-lighter-navy
+                    &:after
+                        height 80% !important
+                        width 100% !important
+                        background-color rgba(255,255,255,.4)
             .matchupWrapper
                 width 100%
                 display block
+                padding 8px
                 p
                     margin-bottom 0
+                div
+                    z-index 1
+                    position relative
+                .matchupBG
+                    position absolute
+                    height 100%
+                    width calc(100% - 36px)
+                    display block
+                    background-color $color-mid-navy
+                    z-index 0
+                    transition width .2s ease-in-out, left .2s ease-in-out
+                    left 18px
+                    top 0
                 &.tbd
-                    .teamWrapper
-                        transform scale(.9)
+                    .matchupBG
+                        width 50%
+                        left 25%
+                        background-color $color-mid-navy
+                    .matchupIndex
+                        color $color-dark-navy
                 @media $tablet-up
-                    padding 8px
-                    margin-bottom 20px
-                    border-radius 5px
+                    margin-bottom 0
                 .teamWrapper
                     display inline-block
-                    width 45%
+                    width 47%
                     padding 10px 8px
-                    background-color rgba(255,255,255,.4)
-                    transition transform .3s ease
-                    border-radius 4px
+                    background-color $color-lighter-navy
+                    transition background-color .1s ease-in-out
                     @media $desktop-up
                         cursor pointer
                     &.selected
-                        background-color rgba(255,255,255,.6)
+                        background-color $color-white
+                        .teamcodeWrapper,
+                        .teamnameWrapper
+                            list = generateList(color)
+                            apply(list)
+                        .teamBorder
+                            list = generateList(background-color)
+                            apply(list)
                     &.unselected
-                        transform scale(.8)
-                        background-color rgba(255,255,255,.2)
+                        background-color $color-darker-navy
+                        .teamcodeWrapper,
+                        .teamnameWrapper
+                            color $color-lighter-navy
+                        .teamBorder
+                            background-color $color-dark-navy
                     &.homeTeamWrapper
                         text-align right
+                        padding-left 30px
+                        padding-right 16px
                     &.awayTeamWrapper
                         text-align left
+                        padding-left 16px
+                        padding-right 30px
+                    .teamcodeWrapper,
+                    .teamnameWrapper
+                        display inline-block
+                        vertical-align middle
+                        position relative
+                        color $color-darker-navy
+                        transition color .1s ease-in-out
+                    .teamcodeWrapper
+                        width 50%
+                        font-weight $weight-extrabold
+                        font-size 42px
+                        line-height 1
+                    .teamnameWrapper
+                        width 50%
+                        text-transform uppercase
+                        font-size 13px
+                        line-height 1.25
+                    .teamBorder
+                        position absolute
+                        width 10px
+                        height 100%
+                        display block
+                        background-color $color-mid-navy
+                        transition color .1s ease-in-out
+                        top 0
+                .homeTeamWrapper
+                    .teamcodeWrapper
+                        text-align left
+                    .teamnameWrapper
+                        text-align right
+                    .teamBorder
+                        left 0
+                .awayTeamWrapper
+                    .teamcodeWrapper
+                        text-align right
+                    .teamnameWrapper
+                        text-align left
+                    .teamBorder
+                        right 0
                 .atWrapper
                     display inline-block
-                    width 10%
+                    width 6%
                     text-align center
                     cursor drag
                     height 100%
-                    background-color rgba(255,255,255,.1)
+                    .dotsWrapper
+                        width 12px
+                        height 12px
+                        background-image url('../images/dots.png')
+                        background-position center center
+                        background-repeat no-repeat
+                        background-size cover
+                        left 50%
+                        transform translateX(-50%)
+                        opacity .25
+                    p
+                        margin-top 2px
+                        margin-bottom 4px
+                        color $color-darkest-navy
+                        font-size 18px
+                        font-weight $weight-semibold
                 .matchupIndex
                     position absolute
-                    // left -5%
                     width 40px
                     text-align center
-                    left -50px
+                    left -60px
                     top 50%
                     transform translateY(-50%)
+                    color $color-lighter-navy
                     span
-                        font-weight bold
-                        font-size 32px
+                        font-weight $weight-bold
+                        font-size 44px
     #submitButtonWrapper
         #submitButton
             cursor pointer
@@ -132,5 +214,4 @@
             text-align center
             color $color-navy
             padding 10px 30px
-            border-radius 5px
             margin-bottom 30px

@@ -2,9 +2,10 @@
 <meta charset="UTF-8">
 <meta content="utf-8" http-equiv="encoding">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Catamaran:100,300,400,500,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Catamaran:100,300,400,500,700,900" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://d3js.org/d3.v4.js"></script>

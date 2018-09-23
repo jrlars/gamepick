@@ -129,33 +129,86 @@ function renderSchedule(){
         .attr("ondragend", "dragEnd(event)")
         .attr("ondragstart", "drag(event)");
 
+    matchupWrapper.append("div")
+        .attr("class", "matchupBG")
+
     var homeTeamWrapper = matchupWrapper.append("div")
-        .attr("class", "teamWrapper homeTeamWrapper")
+        .attr("class", function(d){
+            return "teamWrapper homeTeamWrapper " + d.hometeamcode;
+        });
+
+    homeTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamBorder " + d.hometeamcode;
+        });
+
+    homeTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamcodeWrapper " + d.hometeamcode;
+        })
+        .append("p")
+        .text(function(d){
+            return d.hometeamcode;
+        });
+
+    homeTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamnameWrapper " + d.hometeamcode;
+        })
         .append("p")
         .text(function(d){
             return d.hometeam;
         });
 
     var atWrapper = matchupWrapper.append("div")
-        .attr("class", "atWrapper grabbable")
-        .append("p")
+        .attr("class", "atWrapper grabbable");
+
+    atWrapper.append("div")
+        .attr("class", "dotsWrapper");
+
+    atWrapper.append("p")
         .text("@");
 
+    atWrapper.append("div")
+        .attr("class", "dotsWrapper");
+
     var awayTeamWrapper = matchupWrapper.append("div")
-        .attr("class", "teamWrapper awayTeamWrapper")
+    .attr("class", function(d){
+        return "teamWrapper awayTeamWrapper " + d.hometeamcode;
+    });
+
+    awayTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamBorder " + d.awayteamcode;
+        });
+
+    awayTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamnameWrapper " + d.awayteamcode;
+        })
         .append("p")
         .text(function(d){
             return d.awayteam;
         });
 
-    // var matchupIndex = matchupWrapper.append("div")
-    //     .attr("class", "matchupIndex")
-    //     .append("span")
-    //     .text(function(d, i){
-    //         return (i+1);
-    //     });
+    awayTeamWrapper.append("div")
+        .attr("class", function(d){
+            return "teamcodeWrapper " + d.awayteamcode;
+        })
+        .append("p")
+        .text(function(d){
+            return d.awayteamcode;
+        });
 
-
+    $(".teamnameWrapper").each(function(){
+        console.log($(this).text());
+        var text = $(this).text();
+        var lastSpace = text.lastIndexOf(" ");
+        $(this).html("");
+        $(this).html(text.substr(0, lastSpace));
+        $(this).append("<br/>")
+        $(this).append(text.substr(lastSpace, text.length));
+    });
 
     //////
     //Listeners for the schedule
@@ -163,7 +216,6 @@ function renderSchedule(){
 
     //select the clicked team and deselect the other team
     d3.selectAll(".teamWrapper").on("click", function(){
-        console.log(d3.select(this));
         d3.select(this.parentNode).classed("tbd", false);
         d3.select(this.parentNode).selectAll("div.teamWrapper").classed("selected", false);
         d3.select(this.parentNode).selectAll("div.teamWrapper").classed("unselected", true);
@@ -171,7 +223,6 @@ function renderSchedule(){
         d3.select(this).classed("selected", true);
 
         var test = d3.select(this.parentNode).datum();
-        // console.log(test);
     })
 
     d3.select("#submitButton").on("click", function(){
@@ -191,8 +242,9 @@ function renderSchedule(){
                     "confidence" : i,
 
                 }
-                finalChoice.push(d);
+                finalChoice.push(choice);
             });
+            console.log("FINALCHOICE");
             console.log(finalChoice);
         }else{
             d3.select("#submitButton").style("background-color", "red");
@@ -217,44 +269,33 @@ function dragLeave(ev){
 function dragEnd(){
     console.log("DRAGEND");
 
+    $("#matchupsContainer").removeClass("dragging");
+
     $(".dropzone").each(function(){
         $(this).removeClass("currentlyDragged")
         $(this).removeClass("currentlyDraggedNeighbor")
     });
 
     addDropZones();
-
-    // $(".dropzone.unoccupied").each(function(){
-    //     $(this).attr("ondragover", "allowDrop(event)");
-    // })
-
-
 }
 
 var divToDrop;
 var dropzoneDiv;
 
 function drag(ev) {
-    console.log(ev.target.id);
     var cur = "#" + ev.target.id;
-    console.log($(cur).parent());
+    $("#matchupsContainer").addClass("dragging");
     $(cur).parent().addClass("currentlyDragged");
     $(cur).parent().prev().addClass("currentlyDraggedNeighbor aboveNeighbor").attr("ondragover", "");
     $(cur).parent().next().addClass("currentlyDraggedNeighbor").attr("ondragover", "");
-
-    // $(".matchupWrapper").parent().not(".currentlyDragged").children().children(".matchupIndex").each(function(){
-    //     $(this).hide();
-    // })
 
     $(".matchupIndex").each(function(){
         $(this).hide();
     })
 
     $(".dropzone").not(".occupied").not(".aboveNeighbor").each(function(index){
-        //$(this).append("<div class='indicator'></div>")
         $(this).append("<div class='matchupIndex'><span>" + (index + 1) + "</span></div>")
     })
-    // $(ev.target.id).style("height","10px !important");
     ev.dataTransfer.setData("text", ev.target.id);
     divToDrop = ev.srcElement;
 }
@@ -266,8 +307,9 @@ function drop(ev) {
         $(this).remove();
     })
 
+    $("#matchupsContainer").removeClass("dragging");
     var data = ev.dataTransfer.getData("text");
-    // console.log(data, "data");
+
     dropzoneDiv = ev.target;
     ev.target.classList.remove("unoccupied");
     ev.target.classList.add("occupied");
@@ -294,10 +336,6 @@ function addDropZones(){
 
     $(".dropzone").before("<div class='dropzone unoccupied' ondragover='allowDrop(event)' ondrop='drop(event)' ondragleave='dragLeave(event)'></div>")
     $("#matchupsContainer").append("<div class='dropzone unoccupied' ondragover='allowDrop(event)' ondrop='drop(event)'></div>")
-    // $(".dropzone").not(".occupied").each(function(index){
-    //     //$(this).append("<div class='indicator'></div>")
-    //     $(this).append("<p>" + index + "</p>")
-    // })
 
     $(".dropzone.unoccupied").each(function(){
         $(this).attr("ondragover", "allowDrop(event)");

@@ -3,9 +3,24 @@ $tablet-up = 'screen and (min-width: 768px)'
 $desktop-up = 'screen and (min-width: 992px)'
 $desktop-large-up = 'screen and (min-width: 1200px)'
 
-$color-navy = #013264
+$color-navy = #1b1b28
 $color-white = #ffffff
 $color-red = #e11133
+
+$font-primary = 'Montserrat', sans-serif;
+
+$weight-regular = 400;
+$weight-semibold = 600;
+$weight-bold = 700;
+$weight-extrabold = 800;
+
+$color-darkest-navy = #1b1b28
+$color-darker-navy = #282837
+$color-dark-navy = #343440
+$color-mid-navy = #4e4e58
+$color-lighter-navy = #9a9a9f
+$color-lightest-navy = #cccccf
+
 
 
 .visible-xs
@@ -25,3 +40,84 @@ $color-red = #e11133
 
 get(hash, key)
     return pair[1] if pair[0] == key for pair in hash
+
+
+$ARI = #97233F;
+$ATL = #A71930;
+$BAL = #241773;
+$BUF = #00338D;
+$CAR = #0085CA;
+$CHI = #C83803;
+$CIN = #FB4F14;
+$CLE = #FF3C00;
+$DAL = #003594;
+$DEN = #FB4F14;
+$DET = #0076B6;
+$GBP = #FFB612;
+$HOU = #A71930;
+$IND = #002C5F;
+$JAX = #006778;
+$KCC = #E31837;
+$LAC = #0080C6;
+$LAR = #866D4B;
+$MIA = #008E97;
+$MIN = #4F2683;
+$NEP = #C60C30;
+$NOS = #D3BC8D;
+$NYG = #0B2265;
+$NYJ = #003F2D;
+$OAK = #A5ACAF;
+$PHI = #004C54;
+$PIT = #FFB612;
+$SFR = #AA0000;
+$SEA = #69BE28;
+$TBB = #D50A0A;
+$TEN = #4495D1;
+$WAS = #773141;
+//$WAS = #FFB612;
+
+
+
+apply(props)
+    props = arguments if length(arguments) > 1
+    for prop in props
+        {"&." + prop[1]}
+            {prop[0]} ($ + prop[1])
+
+generateList(prop)
+    (prop ARI) (prop ATL) (prop BAL) (prop BUF) (prop CAR) (prop CHI) (prop CIN) (prop CLE) (prop DAL) (prop DEN) (prop DET) (prop GBP) (prop HOU) (prop IND) (prop JAX) (prop KCC) (prop LAC) (prop LAR) (prop MIA) (prop MIN) (prop NEP) (prop NOS) (prop NYG) (prop NYJ) (prop OAK) (prop PHI) (prop PIT) (prop SFR) (prop SEA) (prop TBB) (prop TEN) (prop WAS)
+
+
+
+// $ARI = #c1272d;
+// $ATL = #c5004b;
+// $BAL = #9537b9;
+// $BUF = #0071bc;
+// $CAR = #45c7ff;
+// $CHI = #f7931e;
+// $CIN = #f7931e;
+// $CLE = #f7931e;
+// $DAL = #0071bc;
+// $DEN = #f7931e;
+// $DET = #45c7ff;
+// $GBP = #fcde21;
+// $HOU = #c1272d;
+// $IND = #0071bc;
+// $JAX = #00c1cf;
+// $KCC = #c1272d;
+// $LAC = #45c7ff;
+// $LAR = #e3c48f;
+// $MIA = #00c1cf;
+// $MIN = #9537b9;
+// $NEP = #c1272d;
+// $NOS = #e3c48f;
+// $NYG = #0071bc;
+// $NYJ = #1c9f13;
+// $OAK = #8699a6;
+// $PHI = #1c9f13;
+// $PIT = #fcde21;
+// $SFR = #c1272d;
+// $SEA = #7de82c;
+// $TBB = #c5004b;
+// $TEN = #45c7ff;
+// $WAS = #fcde21;
